@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Writer - Writing App</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: var(--space-16);
+  gap: var(--space-16);
+}
+
+.score-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-32);
+  padding: var(--space-16) var(--space-24);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.score-label {
+  color: var(--color-text-secondary);
+}
+
+.score-value {
+  color: var(--color-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.writing-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+#textarea {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-24);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  resize: none;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+#textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+#textarea::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.demon {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 1000;
+  animation: demonPopIn 0.3s var(--ease-standard);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.demon:hover {
+  transform: scale(1.1);
+}
+
+.demon-body {
+  width: 100%;
+  height: 100%;
+  background: var(--color-error);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.demon-horn {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid var(--color-error);
+}
+
+.demon-horn.left {
+  top: -12px;
+  left: 15px;
+  transform: rotate(-15deg);
+}
+
+.demon-horn.right {
+  top: -12px;
+  right: 15px;
+  transform: rotate(15deg);
+}
+
+.demon-eyes {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+}
+
+.demon-eye {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+}
+
+.demon-pupil {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: black;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+}
+
+.demon-mouth {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 15px;
+  border: 3px solid white;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: black;
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  animation: bubbleFloat 0.3s var(--ease-standard);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+.demon.squashing {
+  animation: squash 0.3s var(--ease-standard) forwards;
+}
+
+@keyframes demonPopIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bubbleFloat {
+  from {
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes squash {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2, 0.5);
+  }
+  100% {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="title">✍️ Demon Writer</div>
+        <div class="score-bar">
+            <div class="score-item">
+                <span class="score-label">Words:</span>
+                <span class="score-value" id="wordCount">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Demons Squashed:</span>
+                <span class="score-value" id="demonCount">0</span>
+            </div>
+        </div>
+        <div class="writing-area">
+            <textarea id="textarea" placeholder="Start writing... but beware of the demon! 👹"></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Negative comments for the demon
+        const negativeComments = [
+            "This is terrible writing!",
+            "Nobody will read this...",
+            "You call yourself a writer?",
+            "Give up now!",
+            "This makes no sense!",
+            "Your grammar is awful!",
+            "Delete everything and start over!",
+            "You're wasting your time!",
+            "I've seen better from a toddler!",
+            "This is so boring!",
+            "Why even bother?",
+            "You have no talent!",
+            "This is garbage!",
+            "Everyone will laugh at you!",
+            "You should be embarrassed!"
+        ];
+
+        // Game state
+        let wordCount = 0;
+        let demonCount = 0;
+        let demonTimeout = null;
+        let currentDemon = null;
+
+        // DOM elements
+        const textarea = document.getElementById('textarea');
+        const wordCountDisplay = document.getElementById('wordCount');
+        const demonCountDisplay = document.getElementById('demonCount');
+
+        // Update word count
+        function updateWordCount() {
+            const text = textarea.value.trim();
+            if (text === '') {
+                wordCount = 0;
+            } else {
+                wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
+            }
+            wordCountDisplay.textContent = wordCount;
+        }
+
+        // Get random comment
+        function getRandomComment() {
+            return negativeComments[Math.floor(Math.random() * negativeComments.length)];
+        }
+
+        // Get random position for demon
+        function getRandomPosition() {
+            const padding = 100;
+            const maxX = window.innerWidth - padding;
+            const maxY = window.innerHeight - padding;
+            
+            // Avoid placing demon near textarea
+            const textareaRect = textarea.getBoundingClientRect();
+            let x, y;
+            let attempts = 0;
+            
+            do {
+                x = Math.random() * (maxX - padding) + padding;
+                y = Math.random() * (maxY - padding) + padding;
+                attempts++;
+                
+                // If we can't find a good spot after 20 attempts, just place it anywhere
+                if (attempts > 20) break;
+                
+            } while (
+                x > textareaRect.left - 100 && 
+                x < textareaRect.right + 100 &&
+                y > textareaRect.top - 100 && 
+                y < textareaRect.bottom + 100
+            );
+            
+            return { x, y };
+        }
+
+        // Create demon element
+        function createDemon() {
+            if (currentDemon) return; // Only one demon at a time
+            
+            const demon = document.createElement('div');
+            demon.className = 'demon';
+            
+            const position = getRandomPosition();
+            demon.style.left = position.x + 'px';
+            demon.style.top = position.y + 'px';
+            
+            const comment = getRandomComment();
+            
+            demon.innerHTML = `
+                <div class="speech-bubble">${comment}</div>
+                <div class="demon-body">
+                    <div class="demon-horn left"></div>
+                    <div class="demon-horn right"></div>
+                    <div class="demon-eyes">
+                        <div class="demon-eye">
+                            <div class="demon-pupil"></div>
+                        </div>
+                        <div class="demon-eye">
+                            <div class="demon-pupil"></div>
+                        </div>
+                    </div>
+                    <div class="demon-mouth"></div>
+                </div>
+            `;
+            
+            demon.addEventListener('click', squashDemon);
+            
+            document.body.appendChild(demon);
+            currentDemon = demon;
+        }
+
+        // Squash demon
+        function squashDemon(event) {
+            const demon = event.currentTarget;
+            demon.classList.add('squashing');
+            demon.style.pointerEvents = 'none';
+            
+            // Increment demon count
+            demonCount++;
+            demonCountDisplay.textContent = demonCount;
+            
+            // Remove demon after animation
+            setTimeout(() => {
+                if (demon.parentNode) {
+                    demon.parentNode.removeChild(demon);
+                }
+                currentDemon = null;
+                scheduleDemon();
+            }, 300);
+        }
+
+        // Schedule next demon appearance
+        function scheduleDemon() {
+            if (demonTimeout) {
+                clearTimeout(demonTimeout);
+            }
+            
+            const minDelay = 10000; // 10 seconds
+            const maxDelay = 20000; // 20 seconds
+            const delay = Math.random() * (maxDelay - minDelay) + minDelay;
+            
+            demonTimeout = setTimeout(() => {
+                createDemon();
+            }, delay);
+        }
+
+        // Event listeners
+        textarea.addEventListener('input', updateWordCount);
+
+        // Start the game
+        scheduleDemon();
+    </script>
+</body>
+</html>
