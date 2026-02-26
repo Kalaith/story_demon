@@ -6,7 +6,6 @@ export default function HistoryModal() {
   const {
     history,
     text,
-    wordCount,
     demonCount,
     currentSessionId,
     showHistory,
