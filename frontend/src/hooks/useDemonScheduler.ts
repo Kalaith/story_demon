@@ -4,7 +4,7 @@ import { NEGATIVE_COMMENTS } from '../data/demonComments';
 import { GAME_CONFIG } from '../data/gameConfig';
 import type { DemonPosition } from '../types/game';
 
-export const useDemonScheduler = (textareaRef: React.RefObject<HTMLTextAreaElement>) => {
+export const useDemonScheduler = (textareaRef: React.RefObject<HTMLTextAreaElement | null>) => {
   const { currentDemon, setCurrentDemon, incrementDemonCount } = useGameStore();
   const demonTimeoutRef = useRef<number | null>(null);
   const hasDemonRef = useRef(false);

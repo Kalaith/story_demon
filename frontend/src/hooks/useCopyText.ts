@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useGameStore } from '../stores/gameStore';
 import { GAME_CONFIG } from '../data/gameConfig';
 
-export const useCopyText = (textareaRef: React.RefObject<HTMLTextAreaElement>) => {
+export const useCopyText = (textareaRef: React.RefObject<HTMLTextAreaElement | null>) => {
   const { text, setCopySuccess } = useGameStore();
 
   const handleCopy = useCallback(async () => {
