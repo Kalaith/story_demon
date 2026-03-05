@@ -40,3 +40,5 @@ Thumbs.db
 
 # Deployment artifacts
 backend/DEPLOYMENT_SUMMARY.md
+
+**/.env*
