@@ -6,7 +6,7 @@ import type { DemonPosition } from '../types/game';
 
 export const useDemonScheduler = (textareaRef: React.RefObject<HTMLTextAreaElement | null>) => {
   const { currentDemon, setCurrentDemon, incrementDemonCount } = useGameStore();
-  const demonTimeoutRef = useRef<number | null>(null);
+  const demonTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasDemonRef = useRef(false);
   const baseWordCountRef = useRef<number>(0);
 
