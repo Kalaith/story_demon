@@ -44,22 +44,17 @@ git clone <repository-url>
 cd story_demon
 ```
 
-2. Navigate to the frontend directory:
+2. From the monorepo root, install the shared workspace dependencies:
 ```bash
-cd frontend
+cd D:\WebHatchery
+npm ci
 ```
-
-3. Install dependencies:
-```bash
-npm install
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-5. Open your browser and navigate to `http://localhost:5173`
+4. Open your browser and navigate to `http://localhost:5173`
 
 ## 📜 Available Scripts
 
